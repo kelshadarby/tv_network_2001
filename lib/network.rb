@@ -14,6 +14,9 @@ class Network
 
   def main_characters
     characters = @shows.map { |show| show.characters }.flatten!
+    characters.find_all do |character|
+      character.salary > 500000 && character.name == character.name.upcase
+    end
   end
 
   def actors_by_show

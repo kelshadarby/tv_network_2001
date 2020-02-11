@@ -39,7 +39,7 @@ class NetworkTest < Minitest::Test
   def test_it_can_return_main_characters
     @nbc.add_show(@knight_rider)
     @nbc.add_show(@parks_and_rec)
-    expected = [@michael_knight, @kitt, @leslie_knope, @ron_swanson]
+    expected = [@kitt]
 
     assert_equal expected, @nbc.main_characters
   end
@@ -54,5 +54,4 @@ class NetworkTest < Minitest::Test
     }
     assert_equal expected, @nbc.actors_by_show
   end
-
 end
