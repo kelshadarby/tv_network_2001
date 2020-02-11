@@ -12,9 +12,11 @@ class NetworkTest < Minitest::Test
     @kitt = Character.new({name: "KITT", actor: "William Daniels", salary: 1_000_000})
     @leslie_knope = Character.new({name: "Leslie Knope", actor: "Amy Poehler", salary: 2_000_000})
     @ron_swanson = Character.new({name: "Ron Swanson", actor: "Nick Offerman", salary: 1_400_000})
+    @mitch = Character.new({name: "Mitch Buchannon", actor: "David Hasselhoff", salary: 1_200_000})
 
     @knight_rider = Show.new("Knight Rider", "Glen Larson", [@michael_knight, @kitt])
     @parks_and_rec = Show.new("Parks and Recreation", "Michael Shur & Greg Daniels", [@leslie_knope, @ron_swanson])
+    @baywatch = Show.new("Baywatch", "Gregory Bonann", [@mitch])
   end
 
   def test_it_exists
@@ -53,5 +55,20 @@ class NetworkTest < Minitest::Test
       @parks_and_rec => ["Amy Poehler", "Nick Offerman"]
     }
     assert_equal expected, @nbc.actors_by_show
+  end
+
+  def test_it_can_tell_shows_by_actor
+    @nbc.add_show(@knight_rider)
+    @nbc.add_show(@baywatch)
+    @nbc.add_show(@parks_and_rec)
+
+    expected = {
+      "David Hasselhoff" => [@knight_rider, @baywatch],
+      "William Daniels" => [@knight_rider],
+      "Amy Poehler" => [@parks_and_rec],
+      "Nick Offerman" => [@parks_and_rec]
+      }
+
+    assert_equal expected, @nbc.shows_by_actor
   end
 end

@@ -29,4 +29,19 @@ class Network
       actors_hash
     end
   end
+
+  def shows_by_actor
+    actors = @shows.map { |show| show.actors }.flatten!
+
+    actors.reduce({}) do |shows_hash, actor|
+      if actors.any?{ |actor| actor == actor } && shows_hash.has_key?(show.actors)
+        shows_hash[actor] << show
+      elsif actors.any?{ |actor| actor == actor } == actor
+        shows_hash[actor] = [show]
+      end
+      shows_hash
+    end
+  end
+
+
 end
